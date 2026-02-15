@@ -1,10 +1,13 @@
 {
   "name": "battle-facilities-assistant",
   "version": "1.0.0",
-  "description": "Pokemon Battle Faciities probability calculator",
+  "homepage": "https://echen52.github.io/battle-facilities-assistant",
+  "description": "Pokemon Battle Facilities probability calculator",
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build"
+    "build": "react-scripts build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "dependencies": {
     "react": "^18.2.0",

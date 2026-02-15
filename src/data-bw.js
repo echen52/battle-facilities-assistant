@@ -19886,7 +19886,7 @@ export const POKEMON_BW = [
   {
     "entry": 230,
     "name": "P 230",
-    "species": "Mrmime",
+    "species": "Mr. Mime",
     "instance": "1",
     "nature": "Naive",
     "item": "Choice Scarf",
@@ -19899,7 +19899,7 @@ export const POKEMON_BW = [
   {
     "entry": 405,
     "name": "P 405",
-    "species": "Mrmime",
+    "species": "Mr. Mime",
     "instance": "2",
     "nature": "Lonely",
     "item": "Jaboca Berry",
@@ -19912,7 +19912,7 @@ export const POKEMON_BW = [
   {
     "entry": 580,
     "name": "P 580",
-    "species": "Mrmime",
+    "species": "Mr. Mime",
     "instance": "3",
     "nature": "Timid",
     "item": "Lum Berry",
@@ -19925,7 +19925,7 @@ export const POKEMON_BW = [
   {
     "entry": 755,
     "name": "P 755",
-    "species": "Mrmime",
+    "species": "Mr. Mime",
     "instance": "4",
     "nature": "Bold",
     "item": "Light Clay",

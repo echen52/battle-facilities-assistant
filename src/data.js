@@ -20812,7 +20812,7 @@ export const POKEMON = [
   {
     "entry": 381,
     "name": "Mrmime 1",
-    "species": "Mrmime",
+    "species": "Mr. Mime",
     "instance": "1",
     "nature": "Relaxed",
     "item": "Leftovers",
@@ -22184,7 +22184,7 @@ export const POKEMON = [
   {
     "entry": 479,
     "name": "Mrmime 2",
-    "species": "Mrmime",
+    "species": "Mr. Mime",
     "instance": "2",
     "nature": "Adamant",
     "item": "Liechi Berry",
@@ -23500,7 +23500,7 @@ export const POKEMON = [
   {
     "entry": 573,
     "name": "Mrmime 3",
-    "species": "Mrmime",
+    "species": "Mr. Mime",
     "instance": "3",
     "nature": "Modest",
     "item": "Choice Band",
@@ -24844,7 +24844,7 @@ export const POKEMON = [
   {
     "entry": 669,
     "name": "Mrmime 4",
-    "species": "Mrmime",
+    "species": "Mr. Mime",
     "instance": "4",
     "nature": "Modest",
     "item": "BrightPowder",

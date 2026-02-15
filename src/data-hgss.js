@@ -12417,7 +12417,7 @@ export const POKEMON_HGSS = [
     "move2": "Shadow Ball",
     "move3": "Mud-Slap",
     "move4": "Will-O-Wisp",
-    "speed": 93
+    "speed": 85
   },
   {
     "entry": 862,
@@ -15243,7 +15243,7 @@ export const POKEMON_HGSS = [
   {
     "entry": 369,
     "name": "MRMIME 1",
-    "species": "Mrmime",
+    "species": "Mr. Mime",
     "instance": "1",
     "nature": "Calm",
     "item": "Cheri Berry",
@@ -15256,7 +15256,7 @@ export const POKEMON_HGSS = [
   {
     "entry": 505,
     "name": "MRMIME 2",
-    "species": "Mrmime",
+    "species": "Mr. Mime",
     "instance": "2",
     "nature": "Calm",
     "item": "Light Clay",
@@ -15269,7 +15269,7 @@ export const POKEMON_HGSS = [
   {
     "entry": 641,
     "name": "MRMIME 3",
-    "species": "Mrmime",
+    "species": "Mr. Mime",
     "instance": "3",
     "nature": "Modest",
     "item": "Kasib Berry",
@@ -15282,7 +15282,7 @@ export const POKEMON_HGSS = [
   {
     "entry": 777,
     "name": "MRMIME 4",
-    "species": "Mrmime",
+    "species": "Mr. Mime",
     "instance": "4",
     "nature": "Modest",
     "item": "Choice Specs",
