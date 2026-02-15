@@ -1,7 +1,7 @@
 {
-  "name": "battle-frontier-assistant",
+  "name": "battle-facilities-assistant",
   "version": "1.0.0",
-  "description": "Pokemon Battle Frontier probability calculator",
+  "description": "Pokemon Battle Faciities probability calculator",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build"

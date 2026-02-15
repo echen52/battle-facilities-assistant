@@ -154,22 +154,22 @@ const BattleFrontierAssistant = () => {
   const ALARMS_1 = generation === 'gen5'
     ? new Set(['Fake Out', 'Quick Attack', 'Mach Punch', 'Bullet Punch', 'Aqua Jet', 'Ice Shard', 'Shadow Sneak', 'Sucker Punch', 'ExtremeSpeed'])
     : new Set(['Sheer Cold', 'Horn Drill', 'Fissure', 'Guillotine', 'Reversal']);
-
+  
   const ALARMS_2 = generation === 'gen5'
     ? new Set(['Rain Dance', 'Hail', 'Trick Room', 'Sunny Day', 'Sandstorm'])
     : new Set(['Swords Dance', 'Dragon Dance', 'Double Team']);
-
+  
   const ALARMS_3 = generation === 'gen5'
     ? new Set(['Counter', 'Mirror Coat', 'Fling'])
     : new Set(['Counter', 'Mirror Coat', 'Psych Up']);
-
+  
   const ALARM_TOTAL = new Set([...ALARMS_1, ...ALARMS_2, ...ALARMS_3]);
-
+  
   const ITEM_ALARM_TOTAL = generation === 'gen3'
     ? new Set(['BrightPowder', 'Lax Incense', 'Quick Claw'])
     : generation === 'gen4'
     ? new Set(['Brightpowder', 'Lax Incense', 'Focus Sash', 'Choice Scarf', 'Quick Claw'])
-    : new Set(['BrightPowder', 'Lax Incense', 'Focus Sash', 'Choice Scarf', 'Quick Claw']); // Gen V uses "Bright Powder" with space
+    : new Set(['Bright Powder', 'Lax Incense', 'Focus Sash', 'Choice Scarf', 'Quick Claw']); // Gen V uses "Bright Powder" with space
 
   // Get alarm labels based on generation
   const getAlarmLabels = () => {
@@ -198,7 +198,7 @@ const BattleFrontierAssistant = () => {
   // Filter trainers based on search
   const filteredTrainers = useMemo(() => {
     if (!searchQuery) return [];
-    return trainerList.filter(name =>
+    return trainerList.filter(name => 
       name.toLowerCase().includes(searchQuery.toLowerCase())
     ).slice(0, 10);
   }, [trainerList, searchQuery]);
@@ -266,7 +266,7 @@ const BattleFrontierAssistant = () => {
     teams.forEach(team => {
       let teammoves = [];
       let teamitems = [];
-
+      
       if (numSelected === 0) {
         // Check all 3 Pokemon
         teammoves = team.flatMap(p => p.moveList);
@@ -280,7 +280,7 @@ const BattleFrontierAssistant = () => {
         teammoves = team[2].moveList;
         teamitems = [team[2].item];
       }
-
+      
       if (teammoves.some(m => ALARMS_1.has(m))) alarm1Counter++;
       if (teammoves.some(m => ALARMS_2.has(m))) alarm2Counter++;
       if (teammoves.some(m => ALARMS_3.has(m))) alarm3Counter++;
@@ -345,8 +345,8 @@ const BattleFrontierAssistant = () => {
     // Filter teams - EXCLUDE teams that have any selected species or items
     // This matches Python logic: keep teams where NO pokemon matches the selected ones
     let filteredTeams = analysisState.teams.filter(team =>
-      team.every(p =>
-        !newSelected.some(selected =>
+      team.every(p => 
+        !newSelected.some(selected => 
           p.species === selected.species || p.item === selected.item
         )
       )
@@ -355,7 +355,7 @@ const BattleFrontierAssistant = () => {
     // Recalculate odds using the ORIGINAL pokemonList from the initial analysis
     // This maintains object references that teams use
     const updatedPokemonList = analysisState.pokemonList.map(pokemon => {
-      const count = filteredTeams.filter(team =>
+      const count = filteredTeams.filter(team => 
         team.some(p => p.name === pokemon.name)
       ).length;
       return {
@@ -381,7 +381,7 @@ const BattleFrontierAssistant = () => {
         totalOdds += odds;
       }
     });
-
+    
     // Normalize the species probabilities
     if (totalOdds > 0) {
       Object.keys(speciesMap).forEach(species => {
@@ -432,10 +432,10 @@ const BattleFrontierAssistant = () => {
   // Get sets for a species
   const getSetsForSpecies = (species) => {
     if (!analysisState) return [];
-
+    
     const sets = analysisState.pokemonList.filter(p => p.species === species);
     const totalOdds = analysisState.speciesMap[species] || 0;
-
+    
     return sets.map(set => ({
       ...set,
       normalizedOdds: totalOdds > 0 ? set.localOdds / totalOdds : 0
@@ -443,10 +443,10 @@ const BattleFrontierAssistant = () => {
   };
 
   return (
-    <div style={{
-      padding: '20px',
-      fontFamily: 'monospace',
-      maxWidth: '1200px',
+    <div style={{ 
+      padding: '20px', 
+      fontFamily: 'monospace', 
+      maxWidth: '1200px', 
       margin: '0 auto',
       minHeight: '100vh',
       backgroundColor: '#1a1a2e',
@@ -550,9 +550,9 @@ const BattleFrontierAssistant = () => {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search trainer name..."
-              style={{
-                width: '100%',
-                padding: '10px',
+              style={{ 
+                width: '100%', 
+                padding: '10px', 
                 fontSize: '16px',
                 marginBottom: '10px',
                 backgroundColor: '#0f3460',
@@ -597,8 +597,8 @@ const BattleFrontierAssistant = () => {
         <div>
           <div style={{ marginBottom: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <h2 style={{ color: '#eee' }}>Trainer: {selectedTrainer}</h2>
-            <button onClick={reset} style={{
-              padding: '8px 16px',
+            <button onClick={reset} style={{ 
+              padding: '8px 16px', 
               cursor: 'pointer',
               backgroundColor: '#0f3460',
               color: '#eee',
@@ -610,9 +610,9 @@ const BattleFrontierAssistant = () => {
           </div>
 
           {/* Stats */}
-          <div style={{
-            backgroundColor: '#16213e',
-            padding: '15px',
+          <div style={{ 
+            backgroundColor: '#16213e', 
+            padding: '15px', 
             marginBottom: '20px',
             border: '2px solid #0f3460',
             color: '#eee'
@@ -642,8 +642,8 @@ const BattleFrontierAssistant = () => {
 
           {/* Species Cards */}
           <h3 style={{ color: '#eee' }}>Pokémon Probabilities (Click to expand)</h3>
-          <div style={{
-            display: 'grid',
+          <div style={{ 
+            display: 'grid', 
             gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
             gap: '10px',
             marginBottom: '20px'
@@ -653,13 +653,13 @@ const BattleFrontierAssistant = () => {
               .map(([species, odds]) => {
                 const isSelected = selectedPokemon.some(p => p.species === species);
                 const canClick = !isSelected && selectedPokemon.length < 3;
-
+                
                 // Get Pokemon sprite URL using National Dex number
                 const dexNumber = POKEMON_DEX[species];
-                const spriteUrl = dexNumber
+                const spriteUrl = dexNumber 
                   ? `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${dexNumber}.png`
                   : null;
-
+                
                 return (
                   <div
                     key={species}
@@ -683,8 +683,8 @@ const BattleFrontierAssistant = () => {
                     }}
                   >
                     {spriteUrl && (
-                      <img
-                        src={spriteUrl}
+                      <img 
+                        src={spriteUrl} 
                         alt={species}
                         style={{ width: '96px', height: '96px', imageRendering: 'pixelated' }}
                         onError={(e) => {
@@ -703,18 +703,18 @@ const BattleFrontierAssistant = () => {
 
           {/* Expanded Species Sets */}
           {expandedSpecies && (
-            <div style={{
-              backgroundColor: '#16213e',
-              padding: '20px',
+            <div style={{ 
+              backgroundColor: '#16213e', 
+              padding: '20px', 
               border: '2px solid #0f3460',
               marginBottom: '20px'
             }}>
               <h3 style={{ color: '#eee' }}>
                 {expandedSpecies.toUpperCase()} - Select Set
-                <button
+                <button 
                   onClick={() => setExpandedSpecies(null)}
-                  style={{
-                    marginLeft: '20px',
+                  style={{ 
+                    marginLeft: '20px', 
                     padding: '5px 10px',
                     backgroundColor: '#0f3460',
                     color: '#eee',
@@ -748,7 +748,7 @@ const BattleFrontierAssistant = () => {
                       const hasZeroProbability = set.normalizedOdds === 0;
                       const backgroundColor = hasZeroProbability ? '#0f3460' : (set.hasAlarm || set.hasItemAlarm ? '#3d1f1f' : '#16213e');
                       const textColor = hasZeroProbability ? '#666' : '#eee';
-
+                      
                       return (
                         <tr key={set.name} style={{ backgroundColor, color: textColor }}>
                           <td style={{ padding: '8px', border: '1px solid #0f3460', textAlign: 'center' }}>
@@ -766,10 +766,10 @@ const BattleFrontierAssistant = () => {
                           <td style={{ padding: '8px', border: '1px solid #0f3460' }}>{set.moveList[3]}</td>
                           <td style={{ padding: '8px', border: '1px solid #0f3460' }}>{set.speed}</td>
                           <td style={{ padding: '8px', border: '1px solid #0f3460', textAlign: 'center' }}>
-                            <button
+                            <button 
                               onClick={() => selectPokemon(set)}
-                              style={{
-                                padding: '5px 10px',
+                              style={{ 
+                                padding: '5px 10px', 
                                 cursor: hasZeroProbability ? 'not-allowed' : 'pointer',
                                 opacity: hasZeroProbability ? 0.5 : 1,
                                 backgroundColor: '#0f3460',
@@ -792,9 +792,9 @@ const BattleFrontierAssistant = () => {
           )}
 
           {selectedPokemon.length === 3 && (
-            <div style={{
-              backgroundColor: '#1f3a2e',
-              padding: '20px',
+            <div style={{ 
+              backgroundColor: '#1f3a2e', 
+              padding: '20px', 
               border: '2px solid #2ecc71',
               textAlign: 'center',
               color: '#eee'

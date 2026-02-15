@@ -1,6 +1,6 @@
-# Battle Frontier Assistant
+# Battle Facilities Assistant
 
-Pokemon Battle Frontier probability calculator for Emerald (Gen III), HeartGold/SoulSilver (Gen IV), and Black/White Battle Subway (Gen V).
+Pokemon Battle Facilities probability calculator for Emerald (Gen III), HeartGold/SoulSilver (Gen IV), and Black/White Battle Subway (Gen V).
 
 ## Setup Instructions
 
