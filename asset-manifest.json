@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/battle-facilities-assistant/static/js/main.a671b8ae.js",
+    "main.js": "/battle-facilities-assistant/static/js/main.34174e7a.js",
     "index.html": "/battle-facilities-assistant/index.html",
-    "main.a671b8ae.js.map": "/battle-facilities-assistant/static/js/main.a671b8ae.js.map"
+    "main.34174e7a.js.map": "/battle-facilities-assistant/static/js/main.34174e7a.js.map"
   },
   "entrypoints": [
-    "static/js/main.a671b8ae.js"
+    "static/js/main.34174e7a.js"
   ]
 }
