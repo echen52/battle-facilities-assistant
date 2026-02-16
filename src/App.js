@@ -169,7 +169,7 @@ const BattleFrontierAssistant = () => {
   const ITEM_ALARM_TOTAL = generation === 'gen3'
     ? new Set(['BrightPowder', 'Lax Incense', 'Quick Claw'])
     : generation === 'gen4'
-    ? new Set(['Brightpowder', 'Lax Incense', 'Focus Sash', 'Choice Scarf', 'Quick Claw'])
+    ? new Set(['BrightPowder', 'Lax Incense', 'Focus Sash', 'Choice Scarf', 'Quick Claw'])
     : new Set(['BrightPowder', 'Lax Incense', 'Focus Sash', 'Choice Scarf', 'Quick Claw']); // Gen V uses "BrightPowder" like Gen III
 
   // Get alarm labels based on generation
