@@ -140,6 +140,7 @@ const POKEMON_DEX = {
 const BattleFrontierAssistant = () => {
   const [generation, setGeneration] = useState('gen3'); // 'gen3', 'gen4', or 'gen5'
   const [level, setLevel] = useState(50); // Default to Level 50
+  const [battleFormat, setBattleFormat] = useState('singles'); // 'singles' or 'doubles'
   const [selectedTrainer, setSelectedTrainer] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
   const [analysisState, setAnalysisState] = useState(null);
@@ -169,7 +170,7 @@ const BattleFrontierAssistant = () => {
     ? new Set(['BrightPowder', 'Lax Incense', 'Quick Claw'])
     : generation === 'gen4'
     ? new Set(['Brightpowder', 'Lax Incense', 'Focus Sash', 'Choice Scarf', 'Quick Claw'])
-    : new Set(['Bright Powder', 'Lax Incense', 'Focus Sash', 'Choice Scarf', 'Quick Claw']); // Gen V uses "Bright Powder" with space
+    : new Set(['BrightPowder', 'Lax Incense', 'Focus Sash', 'Choice Scarf', 'Quick Claw']); // Gen V uses "BrightPowder" like Gen III
 
   // Get alarm labels based on generation
   const getAlarmLabels = () => {
@@ -220,7 +221,9 @@ const BattleFrontierAssistant = () => {
       item: pokemon.item,
       nature: pokemon.nature,
       moveList,
-      speed: generation === 'gen3' && level === 100 ? pokemon.speed100 : pokemon.speed,
+      speed: generation === 'gen3' 
+        ? (level === 100 ? pokemon.speed100 : pokemon.speed50)
+        : pokemon.speed,
       hasAlarm,
       hasItemAlarm,
       localOdds: 0
@@ -231,19 +234,44 @@ const BattleFrontierAssistant = () => {
   const generateUniqueTeams = (pokemonList) => {
     const teams = [];
     const n = pokemonList.length;
+    const teamSize = battleFormat === 'singles' ? 3 : 4;
 
-    for (let i = 0; i < n - 2; i++) {
-      for (let j = i + 1; j < n - 1; j++) {
-        for (let k = j + 1; k < n; k++) {
-          const p1 = pokemonList[i];
-          const p2 = pokemonList[j];
-          const p3 = pokemonList[k];
+    // Generate combinations based on team size
+    if (teamSize === 3) {
+      for (let i = 0; i < n - 2; i++) {
+        for (let j = i + 1; j < n - 1; j++) {
+          for (let k = j + 1; k < n; k++) {
+            const p1 = pokemonList[i];
+            const p2 = pokemonList[j];
+            const p3 = pokemonList[k];
 
-          const species = new Set([p1.species, p2.species, p3.species]);
-          const items = new Set([p1.item, p2.item, p3.item]);
+            const species = new Set([p1.species, p2.species, p3.species]);
+            const items = new Set([p1.item, p2.item, p3.item]);
 
-          if (species.size === 3 && items.size === 3) {
-            teams.push([p1, p2, p3]);
+            if (species.size === 3 && items.size === 3) {
+              teams.push([p1, p2, p3]);
+            }
+          }
+        }
+      }
+    } else {
+      // Doubles: 4 Pokemon teams
+      for (let i = 0; i < n - 3; i++) {
+        for (let j = i + 1; j < n - 2; j++) {
+          for (let k = j + 1; k < n - 1; k++) {
+            for (let l = k + 1; l < n; l++) {
+              const p1 = pokemonList[i];
+              const p2 = pokemonList[j];
+              const p3 = pokemonList[k];
+              const p4 = pokemonList[l];
+
+              const species = new Set([p1.species, p2.species, p3.species, p4.species]);
+              const items = new Set([p1.item, p2.item, p3.item, p4.item]);
+
+              if (species.size === 4 && items.size === 4) {
+                teams.push([p1, p2, p3, p4]);
+              }
+            }
           }
         }
       }
@@ -253,32 +281,38 @@ const BattleFrontierAssistant = () => {
   };
 
   // Calculate alarm probabilities
-  // numSelected determines how many pokemon to check:
-  // 0 selected -> check all 3 (indices 0,1,2)
-  // 1 selected -> check 2 (indices 1,2)
-  // 2 selected -> check 1 (index 2)
+  // numSelected determines how many pokemon to check based on format:
+  // Singles (3 total):
+  //   0 selected -> check all 3 (indices 0,1,2)
+  //   1 selected -> check 2 (indices 1,2)
+  //   2 selected -> check 1 (index 2)
+  // Doubles (4 total):
+  //   0 selected -> check all 4 (indices 0,1,2,3)
+  //   1 selected -> check 3 (indices 1,2,3)
+  //   2 selected -> check 2 (indices 2,3)
+  //   3 selected -> check 1 (index 3)
   const calculateAlarmStats = (teams, numSelected = 0) => {
     let alarm1Counter = 0;
     let alarm2Counter = 0;
     let alarm3Counter = 0;
     let itemAlarmCounter = 0;
 
+    const teamSize = battleFormat === 'singles' ? 3 : 4;
+
     teams.forEach(team => {
       let teammoves = [];
       let teamitems = [];
       
       if (numSelected === 0) {
-        // Check all 3 Pokemon
+        // Check all Pokemon in team
         teammoves = team.flatMap(p => p.moveList);
         teamitems = team.map(p => p.item);
-      } else if (numSelected === 1) {
-        // Check pokemon at indices 1 and 2
-        teammoves = [...team[1].moveList, ...team[2].moveList];
-        teamitems = [team[1].item, team[2].item];
-      } else if (numSelected === 2) {
-        // Check only pokemon at index 2
-        teammoves = team[2].moveList;
-        teamitems = [team[2].item];
+      } else {
+        // Check remaining Pokemon (skip the first numSelected)
+        for (let i = numSelected; i < teamSize; i++) {
+          teammoves.push(...team[i].moveList);
+          teamitems.push(team[i].item);
+        }
       }
       
       if (teammoves.some(m => ALARMS_1.has(m))) alarm1Counter++;
@@ -310,9 +344,10 @@ const BattleFrontierAssistant = () => {
     const teams = generateUniqueTeams(sets);
 
     // Calculate local odds for each Pokemon
+    const teamSize = battleFormat === 'singles' ? 3 : 4;
     sets.forEach(pokemon => {
       const count = teams.filter(team => team.some(p => p.name === pokemon.name)).length;
-      pokemon.localOdds = count / (3 * teams.length);
+      pokemon.localOdds = count / (teamSize * teams.length);
     });
 
     // Calculate species probabilities
@@ -354,13 +389,14 @@ const BattleFrontierAssistant = () => {
 
     // Recalculate odds using the ORIGINAL pokemonList from the initial analysis
     // This maintains object references that teams use
+    const teamSize = battleFormat === 'singles' ? 3 : 4;
     const updatedPokemonList = analysisState.pokemonList.map(pokemon => {
       const count = filteredTeams.filter(team => 
         team.some(p => p.name === pokemon.name)
       ).length;
       return {
         ...pokemon,
-        localOdds: filteredTeams.length > 0 ? count / (3 * filteredTeams.length) : 0
+        localOdds: filteredTeams.length > 0 ? count / (teamSize * filteredTeams.length) : 0
       };
     });
 
@@ -429,6 +465,13 @@ const BattleFrontierAssistant = () => {
     reset();
   };
 
+  // Change battle format
+  const changeBattleFormat = (newFormat) => {
+    setBattleFormat(newFormat);
+    // Reset everything when changing format
+    reset();
+  };
+
   // Get sets for a species
   const getSetsForSpecies = (species) => {
     if (!analysisState) return [];
@@ -455,6 +498,39 @@ const BattleFrontierAssistant = () => {
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '30px' }}>
         <h1 style={{ margin: 0, color: '#eee' }}>Battle Facilities Assistant</h1>
         <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
+          {/* Battle Format Selector */}
+          <div>
+            <span style={{ marginRight: '10px', fontWeight: 'bold' }}>Format:</span>
+            <button
+              onClick={() => changeBattleFormat('singles')}
+              style={{
+                padding: '8px 16px',
+                marginRight: '5px',
+                cursor: 'pointer',
+                backgroundColor: battleFormat === 'singles' ? '#16213e' : '#0f3460',
+                color: battleFormat === 'singles' ? '#00d9ff' : '#eee',
+                border: battleFormat === 'singles' ? '2px solid #00d9ff' : '2px solid #16213e',
+                fontFamily: 'monospace',
+                fontSize: '14px'
+              }}
+            >
+              Singles
+            </button>
+            <button
+              onClick={() => changeBattleFormat('doubles')}
+              style={{
+                padding: '8px 16px',
+                cursor: 'pointer',
+                backgroundColor: battleFormat === 'doubles' ? '#16213e' : '#0f3460',
+                color: battleFormat === 'doubles' ? '#00d9ff' : '#eee',
+                border: battleFormat === 'doubles' ? '2px solid #00d9ff' : '2px solid #16213e',
+                fontFamily: 'monospace',
+                fontSize: '14px'
+              }}
+            >
+              Doubles
+            </button>
+          </div>
           {/* Generation Selector */}
           <div>
             <span style={{ marginRight: '10px', fontWeight: 'bold' }}>Generation:</span>
@@ -652,7 +728,8 @@ const BattleFrontierAssistant = () => {
               .sort((a, b) => b[1] - a[1])
               .map(([species, odds]) => {
                 const isSelected = selectedPokemon.some(p => p.species === species);
-                const canClick = !isSelected && selectedPokemon.length < 3;
+                const maxSelections = battleFormat === 'singles' ? 3 : 4;
+                const canClick = !isSelected && selectedPokemon.length < maxSelections;
                 
                 // Get Pokemon sprite URL using National Dex number
                 const dexNumber = POKEMON_DEX[species];
@@ -791,7 +868,7 @@ const BattleFrontierAssistant = () => {
             </div>
           )}
 
-          {selectedPokemon.length === 3 && (
+          {selectedPokemon.length === (battleFormat === 'singles' ? 3 : 4) && (
             <div style={{ 
               backgroundColor: '#1f3a2e', 
               padding: '20px', 
@@ -800,7 +877,7 @@ const BattleFrontierAssistant = () => {
               color: '#eee'
             }}>
               <h3 style={{ color: '#2ecc71' }}>Analysis Complete!</h3>
-              <p>You have identified all three Pokémon in the opponent's team.</p>
+              <p>You have identified all {battleFormat === 'singles' ? 'three' : 'four'} Pokémon in the opponent's team.</p>
             </div>
           )}
         </div>

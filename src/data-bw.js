@@ -15136,7 +15136,7 @@ export const POKEMON_BW = [
     "move2": "Rock Slide",
     "move3": "Air Slash",
     "move4": "Crunch",
-    "speed": 211
+    "speed": 141
   },
   {
     "entry": 735,
@@ -16384,7 +16384,7 @@ export const POKEMON_BW = [
     "move2": "Heat Wave",
     "move3": "Extrasensory",
     "move4": "SolarBeam",
-    "speed": 250
+    "speed": 167
   },
   {
     "entry": 973,
@@ -17112,7 +17112,7 @@ export const POKEMON_BW = [
     "move2": "Earthquake",
     "move3": "Fire Fang",
     "move4": "Crunch",
-    "speed": 231
+    "speed": 154
   },
   {
     "entry": 906,
@@ -17853,7 +17853,7 @@ export const POKEMON_BW = [
     "move2": "Earth Power",
     "move3": "Dragon Pulse",
     "move4": "Flash Cannon",
-    "speed": 211
+    "speed": 141
   },
   {
     "entry": 304,
@@ -18503,7 +18503,7 @@ export const POKEMON_BW = [
     "move2": "Rock Slide",
     "move3": "Outrage",
     "move4": "Brick Break",
-    "speed": 229
+    "speed": 153
   },
   {
     "entry": 967,
@@ -19140,7 +19140,7 @@ export const POKEMON_BW = [
     "move2": "Ice Punch",
     "move3": "Rock Slide",
     "move4": "Earthquake",
-    "speed": 175
+    "speed": 117
   },
   {
     "entry": 839,
@@ -19413,7 +19413,7 @@ export const POKEMON_BW = [
     "move2": "Thunder",
     "move3": "Volt Switch",
     "move4": "Overheat",
-    "speed": 258
+    "speed": 172
   },
   {
     "entry": 225,
@@ -19894,7 +19894,7 @@ export const POKEMON_BW = [
     "move2": "Nasty Plot",
     "move3": "Barrier",
     "move4": "Baton Pass",
-    "speed": 181
+    "speed": 121
   },
   {
     "entry": 405,
@@ -20245,7 +20245,7 @@ export const POKEMON_BW = [
     "move2": "Earthquake",
     "move3": "Close Combat",
     "move4": "Guillotine",
-    "speed": 225
+    "speed": 150
   },
   {
     "entry": 301,
@@ -20406,7 +20406,7 @@ export const POKEMON_BW = [
   {
     "entry": 362,
     "name": "P 362",
-    "species": "Porygon-z",
+    "species": "Porygon-Z",
     "instance": "1",
     "nature": "Modest",
     "item": "Wise Glasses",
@@ -20419,7 +20419,7 @@ export const POKEMON_BW = [
   {
     "entry": 537,
     "name": "P 537",
-    "species": "Porygon-z",
+    "species": "Porygon-Z",
     "instance": "2",
     "nature": "Modest",
     "item": "Choice Specs",
@@ -20432,7 +20432,7 @@ export const POKEMON_BW = [
   {
     "entry": 712,
     "name": "P 712",
-    "species": "Porygon-z",
+    "species": "Porygon-Z",
     "instance": "3",
     "nature": "Modest",
     "item": "Expert Belt",
@@ -20445,7 +20445,7 @@ export const POKEMON_BW = [
   {
     "entry": 887,
     "name": "P 887",
-    "species": "Porygon-z",
+    "species": "Porygon-Z",
     "instance": "4",
     "nature": "Timid",
     "item": "Sitrus Berry",
@@ -20700,7 +20700,7 @@ export const POKEMON_BW = [
     "move2": "Earthquake",
     "move3": "Brick Break",
     "move4": "ThunderPunch",
-    "speed": 181
+    "speed": 121
   },
   {
     "entry": 811,
@@ -21688,7 +21688,7 @@ export const POKEMON_BW = [
     "move2": "Steel Wing",
     "move3": "Night Slash",
     "move4": "Rock Slide",
-    "speed": 201
+    "speed": 134
   },
   {
     "entry": 759,
@@ -22039,7 +22039,7 @@ export const POKEMON_BW = [
     "move2": "Close Combat",
     "move3": "Roost",
     "move4": "Final Gambit",
-    "speed": 228
+    "speed": 152
   },
   {
     "entry": 592,
@@ -22455,7 +22455,7 @@ export const POKEMON_BW = [
     "move2": "Earthquake",
     "move3": "Stone Edge",
     "move4": "Aerial Ace",
-    "speed": 240
+    "speed": 160
   },
   {
     "entry": 959,
@@ -22715,7 +22715,7 @@ export const POKEMON_BW = [
     "move2": "Earthquake",
     "move3": "Wood Hammer",
     "move4": "Tickle",
-    "speed": 177
+    "speed": 118
   },
   {
     "entry": 568,
@@ -22832,7 +22832,7 @@ export const POKEMON_BW = [
     "move2": "Focus Blast",
     "move3": "Heat Wave",
     "move4": "Extrasensory",
-    "speed": 228
+    "speed": 152
   },
   {
     "entry": 738,

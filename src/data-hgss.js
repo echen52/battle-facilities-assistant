@@ -15724,7 +15724,7 @@ export const POKEMON_HGSS = [
   {
     "entry": 471,
     "name": "PORYGON-Z 1",
-    "species": "Porygon-z",
+    "species": "Porygon-Z",
     "instance": "1",
     "nature": "Modest",
     "item": "Sitrus Berry",
@@ -15737,7 +15737,7 @@ export const POKEMON_HGSS = [
   {
     "entry": 607,
     "name": "PORYGON-Z 2",
-    "species": "Porygon-z",
+    "species": "Porygon-Z",
     "instance": "2",
     "nature": "Timid",
     "item": "Choice Scarf",
@@ -15750,7 +15750,7 @@ export const POKEMON_HGSS = [
   {
     "entry": 743,
     "name": "PORYGON-Z 3",
-    "species": "Porygon-z",
+    "species": "Porygon-Z",
     "instance": "3",
     "nature": "Modest",
     "item": "Wise Glasses",
@@ -15763,7 +15763,7 @@ export const POKEMON_HGSS = [
   {
     "entry": 879,
     "name": "PORYGON-Z 4",
-    "species": "Porygon-z",
+    "species": "Porygon-Z",
     "instance": "4",
     "nature": "Modest",
     "item": "Expert Belt",
