@@ -92,3 +92,12 @@ battle-frontier-app/
 ## Contributing
 
 Found a bug or have a suggestion? DM me @ em_baby (Discord) or potatobagel (Smogon)
+
+## Acknowledgments
+
+- Pokemon sprite images from [PokeAPI](https://pokeapi.co/)
+- Special thanks to the Battle Facilities Discord and Smogon, especially Actaeon for the original code for Gen III Frontier Assistant
+
+## License
+
+This project is for educational and personal use. Pokemon and all related properties are owned by Nintendo, Game Freak, and The Pokemon Company.
