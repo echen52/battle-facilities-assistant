@@ -25,17 +25,19 @@ Pokemon Battle Facilities probability calculator for Emerald (Gen III), Platinum
 
 ## How to Use
 
-1. Select **Generation III** (Emerald), **Generation IV** (PtHGSS), or **Generation V** (BW/BW2 Subway)
-2. For Gen III only: Select **Level 50** or **Level 100**
-3. Search for and select a trainer
-4. View initial probabilities and alarm stats
-5. Click on a Pokemon species card to see all possible sets
-6. Select the specific set you encountered
-7. Repeat for Pokemon #2 and #3
-8. The probabilities update after each selection
+1. Select **Singles** or **Doubles** format at the top
+2. Select **Generation III** (Emerald), **Generation IV** (HGSS), or **Generation V** (B/W Subway)
+3. For Gen III only: Select **Level 50** or **Level 100**
+4. Search for and select a trainer
+5. View initial probabilities and alarm stats
+6. Click on a Pokemon species card to see all possible sets
+7. Select the specific set you encountered
+8. Repeat for all Pokemon (3 for Singles, 4 for Doubles)
+9. The probabilities update after each selection
 
 ## Features
 
+- **Singles/Doubles Support**: Switch between 3v3 and 4v4 team formats
 - **Multi-Generation Support**: Switch between Gen III, IV, and V
 - **Level Selection**: Gen III supports both Level 50 and 100 (Gen IV & V are always Level 50)
 - **Pokemon Sprites**: Visual identification with official sprites (Gen I-V)
