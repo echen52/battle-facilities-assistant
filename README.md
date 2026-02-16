@@ -1,6 +1,6 @@
 # Battle Facilities Assistant
 
-Pokemon Battle Facilities probability calculator for Emerald (Gen III), HeartGold/SoulSilver (Gen IV), and Black/White Battle Subway (Gen V).
+Pokemon Battle Facilities probability calculator for Emerald (Gen III), Platinum/HeartGold/SoulSilver (Gen IV), and Black/White/Black2/White2 Battle Subway (Gen V).
 
 ## Setup Instructions
 
@@ -25,7 +25,7 @@ Pokemon Battle Facilities probability calculator for Emerald (Gen III), HeartGol
 
 ## How to Use
 
-1. Select **Generation III** (Emerald), **Generation IV** (HGSS), or **Generation V** (B/W Subway)
+1. Select **Generation III** (Emerald), **Generation IV** (PtHGSS), or **Generation V** (BW/BW2 Subway)
 2. For Gen III only: Select **Level 50** or **Level 100**
 3. Search for and select a trainer
 4. View initial probabilities and alarm stats
@@ -86,3 +86,7 @@ battle-frontier-app/
 - **Port already in use**: If port 3000 is taken, the app will prompt to use another port
 - **npm install fails**: Try deleting `node_modules` and `package-lock.json`, then run `npm install` again
 - **Sprites not loading**: Check your internet connection (sprites load from GitHub)
+
+## Contributing
+
+Found a bug or have a suggestion? DM me @ em_baby (Discord) or potatobagel (Smogon)
