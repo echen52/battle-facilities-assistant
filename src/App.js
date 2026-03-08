@@ -170,7 +170,7 @@ const BattleFrontierAssistant = () => {
     ? new Set(['BrightPowder', 'Lax Incense', 'Quick Claw'])
     : generation === 'gen4'
     ? new Set(['BrightPowder', 'Lax Incense', 'Focus Sash', 'Choice Scarf', 'Quick Claw'])
-    : new Set(['BrightPowder', 'Lax Incense', 'Focus Sash', 'Choice Scarf', 'Quick Claw']); // Gen V uses "BrightPowder" like Gen III
+    : new Set(['BrightPowder', 'Lax Incense', 'Focus Sash', 'Choice Scarf', 'Quick Claw']); // All gens now use BrightPowder
 
   // Get alarm labels based on generation
   const getAlarmLabels = () => {
@@ -697,10 +697,10 @@ const BattleFrontierAssistant = () => {
             <div><strong>Total Teams:</strong> {analysisState.teams.length}</div>
             <div style={{ marginTop: '10px' }}>
               <strong>Alarm Probabilities:</strong>
-              <div>Alarm 1 ({alarmLabels.alarm1}): {(analysisState.alarmStats.alarm1 * 100).toFixed(2)}%</div>
-              <div>Alarm 2 ({alarmLabels.alarm2}): {(analysisState.alarmStats.alarm2 * 100).toFixed(2)}%</div>
-              <div>Alarm 3 ({alarmLabels.alarm3}): {(analysisState.alarmStats.alarm3 * 100).toFixed(2)}%</div>
-              <div>Item Alarm: {(analysisState.alarmStats.itemAlarm * 100).toFixed(2)}%</div>
+              <div>Alarm 1 ({alarmLabels.alarm1}): <span style={{ color: '#00d9ff' }}>{(analysisState.alarmStats.alarm1 * 100).toFixed(2)}%</span></div>
+              <div>Alarm 2 ({alarmLabels.alarm2}): <span style={{ color: '#00d9ff' }}>{(analysisState.alarmStats.alarm2 * 100).toFixed(2)}%</span></div>
+              <div>Alarm 3 ({alarmLabels.alarm3}): <span style={{ color: '#00d9ff' }}>{(analysisState.alarmStats.alarm3 * 100).toFixed(2)}%</span></div>
+              <div>Item Alarm: <span style={{ color: '#00d9ff' }}>{(analysisState.alarmStats.itemAlarm * 100).toFixed(2)}%</span></div>
             </div>
           </div>
 
@@ -835,7 +835,7 @@ const BattleFrontierAssistant = () => {
                           <td style={{ padding: '8px', border: '1px solid #0f3460', color: hasZeroProbability ? '#666' : '#00d9ff' }}>
                             {(set.normalizedOdds * 100).toFixed(2)}%
                           </td>
-                          <td style={{ padding: '8px', border: '1px solid #0f3460' }}>{set.item}</td>
+                          <td style={{ padding: '8px', border: '1px solid #0f3460', color: hasZeroProbability ? '#666' : '#00d9ff' }}>{set.item}</td>
                           <td style={{ padding: '8px', border: '1px solid #0f3460' }}>{set.nature}</td>
                           <td style={{ padding: '8px', border: '1px solid #0f3460' }}>{set.moveList[0]}</td>
                           <td style={{ padding: '8px', border: '1px solid #0f3460' }}>{set.moveList[1]}</td>
