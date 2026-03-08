@@ -143,6 +143,8 @@ const BattleFrontierAssistant = () => {
   const [battleFormat, setBattleFormat] = useState('singles'); // 'singles' or 'doubles'
   const [selectedTrainer, setSelectedTrainer] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
+  const [highlightedIndex, setHighlightedIndex] = useState(-1); // For keyboard navigation
+  const [speciesFilter, setSpeciesFilter] = useState(''); // Filter for Pokemon species
   const [analysisState, setAnalysisState] = useState(null);
   const [selectedPokemon, setSelectedPokemon] = useState([]);
   const [expandedSpecies, setExpandedSpecies] = useState(null);
@@ -376,6 +378,7 @@ const BattleFrontierAssistant = () => {
     const newSelected = [...selectedPokemon, pokemonSet];
     setSelectedPokemon(newSelected);
     setExpandedSpecies(null);
+    setSpeciesFilter(''); // Clear the filter to show all remaining cards
 
     // Filter teams - EXCLUDE teams that have any selected species or items
     // This matches Python logic: keep teams where NO pokemon matches the selected ones
@@ -448,6 +451,7 @@ const BattleFrontierAssistant = () => {
     setAnalysisState(null);
     setSelectedPokemon([]);
     setExpandedSpecies(null);
+    setSpeciesFilter('');
   };
 
   // Change level
@@ -624,7 +628,26 @@ const BattleFrontierAssistant = () => {
             <input
               type="text"
               value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
+              onChange={(e) => {
+                setSearchQuery(e.target.value);
+                setHighlightedIndex(-1); // Reset highlight on new input
+              }}
+              onKeyDown={(e) => {
+                if (filteredTrainers.length === 0) return;
+                
+                if (e.key === 'ArrowDown') {
+                  e.preventDefault();
+                  setHighlightedIndex(prev => 
+                    prev < filteredTrainers.length - 1 ? prev + 1 : prev
+                  );
+                } else if (e.key === 'ArrowUp') {
+                  e.preventDefault();
+                  setHighlightedIndex(prev => prev > 0 ? prev - 1 : -1);
+                } else if (e.key === 'Enter' && highlightedIndex >= 0) {
+                  e.preventDefault();
+                  startAnalysis(filteredTrainers[highlightedIndex]);
+                }
+              }}
               placeholder="Search trainer name..."
               style={{ 
                 width: '100%', 
@@ -649,7 +672,7 @@ const BattleFrontierAssistant = () => {
                 overflowY: 'auto',
                 zIndex: 1000
               }}>
-                {filteredTrainers.map(trainer => (
+                {filteredTrainers.map((trainer, index) => (
                   <div
                     key={trainer}
                     onClick={() => startAnalysis(trainer)}
@@ -657,10 +680,18 @@ const BattleFrontierAssistant = () => {
                       padding: '10px',
                       cursor: 'pointer',
                       borderBottom: '1px solid #0f3460',
-                      color: '#eee'
+                      color: '#eee',
+                      backgroundColor: index === highlightedIndex ? '#0f3460' : '#16213e'
                     }}
-                    onMouseEnter={(e) => e.target.style.backgroundColor = '#0f3460'}
-                    onMouseLeave={(e) => e.target.style.backgroundColor = '#16213e'}
+                    onMouseEnter={(e) => {
+                      e.target.style.backgroundColor = '#0f3460';
+                      setHighlightedIndex(index);
+                    }}
+                    onMouseLeave={(e) => {
+                      if (index !== highlightedIndex) {
+                        e.target.style.backgroundColor = '#16213e';
+                      }
+                    }}
                   >
                     {trainer}
                   </div>
@@ -718,6 +749,25 @@ const BattleFrontierAssistant = () => {
 
           {/* Species Cards */}
           <h3 style={{ color: '#eee' }}>Pokémon Probabilities (Click to expand)</h3>
+          
+          {/* Species Filter */}
+          <input
+            type="text"
+            value={speciesFilter}
+            onChange={(e) => setSpeciesFilter(e.target.value)}
+            placeholder="Filter by Pokemon name..."
+            style={{ 
+              width: '100%', 
+              padding: '10px', 
+              fontSize: '16px',
+              marginBottom: '15px',
+              backgroundColor: '#0f3460',
+              color: '#eee',
+              border: '2px solid #16213e',
+              fontFamily: 'monospace'
+            }}
+          />
+
           <div style={{ 
             display: 'grid', 
             gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
@@ -726,6 +776,7 @@ const BattleFrontierAssistant = () => {
           }}>
             {Object.entries(analysisState.speciesMap)
               .sort((a, b) => b[1] - a[1])
+              .filter(([species]) => species.toLowerCase().includes(speciesFilter.toLowerCase()))
               .map(([species, odds]) => {
                 const isSelected = selectedPokemon.some(p => p.species === species);
                 const maxSelections = battleFormat === 'singles' ? 3 : 4;
